@@ -16,3 +16,36 @@
     Решение 2.
     По аналогии использовать утилиту ss с теми же атрибутами:
       docker exec <container_id> ss -l
+  5.10
+    Давайте поднимем базу данных PostgreSQL и сделаем какой-нибудь SQL запрос.
+    Вам нужно поднять контейнер на основе образа postgres:14.
+    При поднятии укажите пароль и пользователя, но не указывайте базу данных (т.е. не используйте переменную окружения POSTGRES_DB).
+    В качестве ответа через запятую укажите имена неймспейсов из каталога pg_namespace. У вас должно получиться 4 значения.
+    -------------------------
+    Решение 1.
+    Шаг 1.
+    Поднимем контейнер с посгресом в detauch-режиме и переменными окружение (логин, пароль):
+      docker run --name my_postgres_container -d -e POSTGRES_USER=alex -e POSTGRES_PASSWORD=alex_password -p 6543:5432 postgres:14
+      где 
+      6543 - произвольный порт на хосте
+      5432 - порт посгреса в контейнере
+    Шаг 2.    
+    Войти в контейнер с использованием созданного логина:
+      docker exec -it <container_id> psql -U alex
+    Шаг 3.
+    Создать sql-запрос:
+      SELECT nspname FROM pg_namespace;
+
+    Решение 2.    
+    Шаг 1.
+      См. Решение 1 Шаг 1.
+    Шаг 2.
+      Подключить DBeaver к посгресу в контейнере:
+        Host: localhost
+        Port: 6543 (произвольный порт на хосте, проброшенный в контейнер)
+        Username: alex
+        Password: alex_password
+    Шаг 3.
+      В sql-запроснике DBeaver создать запрос:
+        SELECT nspname FROM pg_namespace;
+    Источник: https://wkrzywiec.medium.com/database-in-a-docker-container-how-to-start-and-whats-it-about-5e3ceea77e50
