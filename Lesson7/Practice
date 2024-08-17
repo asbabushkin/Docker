@@ -4,3 +4,21 @@ COPY --from=APP /app/main main
 7.3
 --target
 
+7.4
+Создать контейнер с бд:
+$ docker run --rm -d --name database --net=back_net -v 7_4db:/var/lib/postgresql/data -e POSTGRES_DB=postgres_db -e POSTGRES_USER=postgres_user -e POSTGRES_PASSWORD=postgres_password postgres:14
+
+Создать контейнер с бэком:
+$ docker run --rm -d --name backend --net=back_net -e PG_HOST=database -e PG_DATABASE=postgres_db -e PG_USER=postgres_user -e PG_PASSWORD=postgres_password kcoursedocker/task-7.4-back
+
+Создать контейнер с фронтом:
+$ docker run --rm -d --name frontend --net=back_net -p 80:80 kcoursedocker/task-7.4-front
+
+Запустить браузер, в адресной строке ввести localhost
+Ваш ответ - 'Well done!'
+
+
+
+
+
+
