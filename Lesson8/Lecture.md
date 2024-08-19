@@ -46,3 +46,29 @@ name:
       Julia: 2
 # Result: {'name': [{'Peter': 12, 'Olga': 13}, {'Oleg': 7, 'Julia': 2}]}
 ```
+Для повторяющихся элементов следует использовать синтаксис & и <<: * - это якорь и ссылка на якорь:
+```
+# Повторяющиеся элементы:
+team:
+    backend:
+        - Peter:
+            position: junior
+            salary: 55000
+        - Olga:
+            position: junior
+            salary: 55000
+
+# Следует описывать так:
+
+junior:
+    &junior   # якорь с именем junior
+    position:junior
+    salary:55000
+
+team:
+    backend:
+        - Peter:
+            <<: *junior   # ссылка на якорь
+        - Olga:
+            <<: *junior   # ссылка на якорь
+```
