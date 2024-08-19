@@ -26,4 +26,11 @@ x-eukaryotes:
         - ribosomes
         - cytoskeleton
 ```
+## 8.4
+docker-compose up db
+docker-compose up -d db
+docker-compose run -d db
+docker-compose run db
 
+## 8.5
+-v
