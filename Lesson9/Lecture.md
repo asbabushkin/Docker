@@ -35,5 +35,6 @@ services:
 
 ```
 Основные инструкции для описания контейнеров нам уже знакомы:
+  ![Container commands](https://github.com/asbabushkin/Docker/blob/main/Lesson9/Container%20commands.png)
 
 
